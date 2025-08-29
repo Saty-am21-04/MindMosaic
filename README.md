@@ -1,75 +1,66 @@
-# 🌿 MindMosaic: Your AI-Powered Mental Wellness Companion
+## 🧠 MindMosaic: Your AI-Powered Mental Wellness Companion
 
-**Mental health matters—and MindMosaic makes it approachable, personal, and beautifully simple.**  
-This web-based app helps users check in with their emotions, reflect through journaling, and receive gentle support—all powered by thoughtful design and AI magic.
-
----
-
-## 🧠 What is MindMosaic?
-
-MindMosaic is a confidential, student-friendly mental health check-in platform built with empathy and simplicity. Whether you're feeling overwhelmed or just want to track your mood, this app is here to listen, learn, and support you—without judgment.
+MindMosaic is a confidential, student-friendly platform designed to make mental health check-ins, reflection, and gentle support approachable and simple. This web-based app helps you track your mood and receive gentle support, all without judgment.
 
 ---
 
-## ✨ Features
+### ✨ Features
 
-- **🌈 Daily Mood Check-In**  
-  Use sliders and emojis to log your stress, energy, and focus levels.
-
-- **💬 AI Chatbot (Coming Soon)**  
-  A conversational bot to offer emotional support and coping strategies.
-
-- **📓 Personal Journal with Prompts**  
-  Write freely or respond to AI-generated prompts like _“What made you smile today?”_
-
-- **📊 Mood Trends & Insights**  
-  Visual charts to help you understand your emotional patterns over time.
-
-- **🎧 Personalized Resources (Coming Soon)**  
-  Curated articles, audios, and exercises based on your check-ins.
-
-- **🚨 Crisis Mode**  
-  One-click access to helplines or campus counselors.
-
-- **🏆 Gamification**  
-  Earn badges and streaks for consistent check-ins and journaling.
-
-- **🫂 Anonymous Community Wall**  
-  Share thoughts or wins anonymously and receive peer encouragement.
+* **Daily Mood Check-In** 🌈
+    * **Current:** A basic mood check-in page with simple button inputs.
+    * **Planned:** Enhanced functionality with sliders for stress, energy, and focus levels.
+* **AI Chatbot** 💬
+    * **Current:** A basic chatbot that provides predefined responses based on keywords.
+    * **Planned:** A conversational bot that offers emotional support and personalized coping strategies using AI.
+* **Personal Journal with Prompts** 📓
+    * **Planned:** A space to write freely or respond to thought-provoking, AI-generated prompts.
+* **Mood Trends & Insights** 📊
+    * **Planned:** Visualize your emotional patterns over time with helpful charts and graphs.
+* **Personalized Resources** 🎧
+    * **Planned:** Curated articles, audio exercises, and helpful resources tailored to your needs.
+* **Crisis Mode** 🚨
+    * **Planned:** Quick, one-click access to mental health helplines and support.
 
 ---
 
-## 🛠️ Built With
+### 🛠️ Technology Stack
 
-- **Frontend**: HTML, CSS, JavaScript  
-- **Backend**: Coming soon (Node.js or Flask planned)  
-- **AI Integration**: Planned via OpenAI API  
-- **Hosting**: GitHub Pages / Netlify (for now)
+MindMosaic is built with a clean, simple, and scalable architecture.
 
----
-
-## 🚀 Getting Started
-
-1. Clone the repo  
-   `git clone https://github.com/your-username/mindmosaic.git`
-
-2. Open `index.html` in your browser  
-   No build tools required—just pure frontend magic!
+* **Frontend**: HTML, CSS, JavaScript
+* **Backend**: Planned (Node.js or Flask)
+* **AI Integration**: Planned (OpenAI API)
+* **Hosting**: GitHub Pages --[MindMosaic](https://saty-am21-04.github.io/MindMosaic/)
 
 ---
 
-## 🤝 Contributing
+### 🚀 Get Started
 
-Got ideas for features, design tweaks, or accessibility improvements?  
-Feel free to fork the repo, open issues, or submit pull requests.  
-Let’s make mental wellness more welcoming—together.
+MindMosaic is a pure frontend app, so you can get it running in no time.
+
+1.  Clone the repository:
+    `git clone https://github.com/Saty-am21-04/MindMosaic.git`
+2.  Open the `index.html` file in your browser to get started!
 
 ---
 
-## 📬 Contact
+### 🤝 Contributing
 
-Created with care by [Satyam Mondal](https://github.com/your-profile)  
-Reach out for feedback, collaboration, or just a friendly hello.
+We welcome contributions of all kinds! If you have ideas for new features, design improvements, or bug fixes, feel free to:
+
+* Fork the repo.
+* Open an issue to discuss your ideas.
+* Submit a pull request with your changes.
+
+Let's make mental wellness more accessible—together.
+
+---
+
+### 📬 Contact
+
+Created with care by [Satyam Mondal](https://github.com/Saty-am21-04).
+
+Feel free to reach out for feedback, collaborations, or a friendly hello!
 
 ---
 
