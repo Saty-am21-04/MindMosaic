@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindMosaic - Mood Check-In</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Quicksand&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>🌿 How are you feeling today?</h1>
+
+
+    
+    <div class="slider-container">
+        <div class="slider-group">
+            <label for="stress">Stress 😣 → 😌</label>
+            <input type="range" id="stress" min="0" max="10" value="5" />
+        </div>
+
+        <div class="slider-group">
+            <label for="energy">Energy 😴 → ⚡</label>
+            <input type="range" id="energy" min="0" max="10" value="5" />
+        </div>
+
+        <div class="slider-group">
+            <label for="focus">Focus 😵 → 🎯</label>
+            <input type="range" id="focus" min="0" max="10" value="5" />
+        </div>
+    </div>
+
+    <div class="emoji-group">
+      <p>Quick Mood Tag:</p>
+      <button data-mood="happy">😊</button>
+      <button data-mood="neutral">😐</button>
+      <button data-mood="sad">😢</button>
+      <button data-mood="angry">😠</button>
+    </div>
+
+    <textarea id="moodInput" placeholder="Or type your mood here..."></textarea>
+    
+    <button id="logMoodBtn">Log My Mood</button>
+  </div>
+
+  <script src="script.js">
+
+  </script>
+</body>
+</html>

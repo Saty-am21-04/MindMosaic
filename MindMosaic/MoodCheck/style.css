@@ -1,0 +1,155 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(to bottom right, #d5ffdabe, #b9dcfa);
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #4a7c59;
+}
+
+h1, h2, .title {
+  font-family: 'Comfortaa', cursive;
+}
+
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 30px 65px;
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers child elements horizontally */
+}
+
+.slider-group label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+  text-align: center;
+}
+
+
+
+.slider-group input[type="range"] {
+  width: 100%;
+  accent-color: #4a7c59; /* Optional: adds a nice green tint to the slider thumb */
+}
+
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+.emoji-group {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Adjust spacing here */
+  margin-bottom: 20px;
+}
+
+
+.emoji-group button {
+  font-size: 24px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  
+  transition: transform 0.3s ease, border 0.3s ease;
+}
+
+/* Hover effect only for buttons that are NOT selected */
+.emoji-group button:not(.selected):hover {
+  transform: scale(1.2);
+  background-color: #f0f0ff;
+  border: 2px solid #ccc;
+}
+
+/* Selected button stays larger and highlighted */
+.emoji-group button.selected {
+  transform: scale(1.05);
+  border: 3px solid #8ef2e3;
+  background-color: #dbfcf4;
+}
+
+
+textarea {
+  width: 100%;
+  max-width: 100%;
+  font-size: 16px;
+  box-sizing: border-box;
+  height: 80px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+textarea:hover{
+  background-color: #f2f2f2;
+}
+
+textarea::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #7aa6ff;
+  box-shadow: 0 0 5px rgba(122, 166, 255, 0.5);
+}
+
+#logMoodBtn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #4a7c59;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#logMoodBtn:hover {
+  background-color: #3a6447;
+}
+
+@media (max-width: 600px) {
+  .emoji-group {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
