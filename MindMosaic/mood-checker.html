@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Current Mood Checker - MindMosaic</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      color: #5a4fcf;
+      user-select: none;
+      text-align: center;
+      text-shadow: 0 0 6px rgba(90, 79, 207, 0.3);
+    }
+
+    p.subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 400px;
+      text-align: center;
+      color: #444;
+    }
+
+    .mood-options {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .mood-option {
+      cursor: pointer;
+      font-size: 3.5rem;
+      user-select: none;
+      transition: transform 0.2s ease;
+      border-radius: 12px;
+      padding: 0.3rem 0.5rem;
+      border: 2px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80px;
+    }
+
+    .mood-option:hover {
+      transform: scale(1.2);
+    }
+
+    .mood-option.selected {
+      border-color: #5a4fcf;
+      background-color: #e0e0ff;
+      transform: scale(1.3);
+    }
+
+    .mood-label {
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      color: #5a4fcf;
+      font-weight: 600;
+    }
+
+    /* --- IMPROVED SLIDER STYLES --- */
+    .slider-container {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 1.5rem 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(90, 79, 207, 0.1);
+    }
+
+    .slider-container label {
+      font-weight: 600;
+      color: #5a4fcf;
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 12px;
+      border-radius: 6px;
+      outline: none;
+      cursor: grab;
+      transition: background 0.3s ease;
+      background: linear-gradient(to right, #6c63ff 0%, #a8edea var(--range-progress, 50%), #d3d3d3 var(--range-progress, 50%), #d3d3d3 100%);
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #5a4fcf;
+      cursor: grab;
+      box-shadow: 0 2px 8px rgba(90, 79, 207, 0.6);
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin-top: -8px;
+      border: 2px solid white;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      background: #3f3bbf;
+      transform: scale(1.1);
+    }
+
+    input[type="range"]::-webkit-slider-thumb:active {
+      cursor: grabbing;
+      transform: scale(1.15);
+    }
+
+    input[type="range"]:focus::-webkit-slider-thumb {
+      background: #3f3bbf;
+      box-shadow: 0 0 0 4px rgba(90, 79, 207, 0.3);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #5a4fcf;
+      cursor: grab;
+      box-shadow: 0 2px 8px rgba(90, 79, 207, 0.6);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      border: 2px solid white;
+    }
+    
+    input[type="range"]::-moz-range-progress {
+      background-color: #6c63ff;
+      border-radius: 6px;
+    }
+    /* --- END OF IMPROVED SLIDER STYLES --- */
+
+    button#submit-btn {
+      background-color: #5a4fcf;
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 6px 12px rgba(90, 79, 207, 0.4);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    button#submit-btn:disabled {
+      background-color: #a8a4ff;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    button#submit-btn:hover:not(:disabled) {
+      background-color: #3f3bbf;
+    }
+
+    #result-message {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #5a4fcf;
+      min-height: 2.5rem;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .mood-option {
+        width: 60px;
+        font-size: 2.5rem;
+      }
+      button#submit-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Current Mood Checker</h1>
+  <p class="subtitle">Select your current mood and how intense it feels.</p>
+
+  <div class="mood-options" role="radiogroup" aria-label="Mood options">
+    <div class="mood-option" role="radio" tabindex="0" aria-checked="false" data-mood="happy" aria-label="Happy mood">
+      😀
+      <div class="mood-label">Happy</div>
+    </div>
+    <div class="mood-option" role="radio" tabindex="-1" aria-checked="false" data-mood="calm" aria-label="Calm mood">
+      😌
+      <div class="mood-label">Calm</div>
+    </div>
+    <div class="mood-option" role="radio" tabindex="-1" aria-checked="false" data-mood="sad" aria-label="Sad mood">
+      😢
+      <div class="mood-label">Sad</div>
+    </div>
+    <div class="mood-option" role="radio" tabindex="-1" aria-checked="false" data-mood="angry" aria-label="Angry mood">
+      😠
+      <div class="mood-label">Angry</div>
+    </div>
+    <div class="mood-option" role="radio" tabindex="-1" aria-checked="false" data-mood="anxious" aria-label="Anxious mood">
+      😰
+      <div class="mood-label">Anxious</div>
+    </div>
+  </div>
+
+  <div class="slider-container">
+    <label for="intensity-slider">Mood Intensity: <span id="intensity-value">5</span>/10</label>
+    <input type="range" id="intensity-slider" min="1" max="10" value="5" />
+  </div>
+
+  <button id="submit-btn" disabled>Check Mood</button>
+
+  <div id="result-message" aria-live="polite"></div>
+
+  <script>
+      // Get all necessary elements from the DOM
+      const moodOptions = document.querySelectorAll('.mood-option');
+      const intensitySlider = document.getElementById('intensity-slider');
+      const intensityValue = document.getElementById('intensity-value');
+      const submitBtn = document.getElementById('submit-btn');
+      const resultMessage = document.getElementById('result-message');
+      const chatContainer = document.getElementById('chat-container');
+      const userInput = document.getElementById('user-input');
+      const sendBtn = document.getElementById('send-btn');
+      const inputForm = document.getElementById('input-area');
+
+      let selectedMood = null;
+
+      // --- Mood Checker Page Logic ---
+      if (moodOptions.length > 0) {
+          // If the mood options exist, we are on the mood checker page
+          
+          function updateSliderFill() {
+              if (!intensitySlider) return;
+              const value = intensitySlider.value;
+              const min = intensitySlider.min || 1;
+              const max = intensitySlider.max || 10;
+              const percentage = (value - min) / (max - min) * 100;
+              intensitySlider.style.setProperty('--range-progress', `${percentage}%`);
+              if (intensityValue) {
+                  intensityValue.textContent = value;
+              }
+          }
+
+          if (intensitySlider) {
+              intensitySlider.addEventListener('input', updateSliderFill);
+              document.addEventListener('DOMContentLoaded', updateSliderFill);
+          }
+          
+          moodOptions.forEach(option => {
+              option.addEventListener('click', () => selectMood(option));
+              option.addEventListener('keydown', e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      selectMood(option);
+                  }
+              });
+          });
+          
+          function selectMood(option) {
+              moodOptions.forEach(opt => {
+                  opt.classList.remove('selected');
+                  opt.setAttribute('aria-checked', 'false');
+                  opt.tabIndex = -1;
+              });
+              option.classList.add('selected');
+              option.setAttribute('aria-checked', 'true');
+              option.tabIndex = 0;
+              option.focus();
+              selectedMood = option.dataset.mood;
+              if (submitBtn) {
+                  submitBtn.disabled = false;
+              }
+              if (resultMessage) {
+                  resultMessage.textContent = '';
+              }
+          }
+          
+          function generateMessage(mood, intensity) {
+              intensity = Number(intensity);
+              switch (mood) {
+                  case 'happy':
+                      if (intensity > 7) return "You're feeling very happy! Keep shining! 🌟";
+                      if (intensity > 4) return "You're feeling good. That's wonderful! 😊";
+                      return "A little happiness goes a long way. Keep it up! 🙂";
+                  case 'calm':
+                      if (intensity > 7) return "You're very calm and centered. Great balance! 🧘‍♂️";
+                      if (intensity > 4) return "Feeling calm is a gift. Enjoy it! 🌿";
+                      return "A gentle calmness is soothing. Stay peaceful. 🌸";
+                  case 'sad':
+                      if (intensity > 7) return "It's okay to feel sad sometimes. Take care of yourself. 💙";
+                      if (intensity > 4) return "Feeling a bit down? Remember, this too shall pass. 🌧️";
+                      return "A little sadness is natural. Reach out if you need support. 🤗";
+                  case 'angry':
+                      if (intensity > 7) return "Strong anger can be tough. Try some deep breaths. 🌬️";
+                      if (intensity > 4) return "Feeling irritated? Take a moment to relax. 🧩";
+                      return "A bit of frustration is normal. Stay mindful. 🧘‍♀️";
+                  case 'anxious':
+                      if (intensity > 7) return "High anxiety can be overwhelming. You're not alone. 💜";
+                      if (intensity > 4) return "Feeling anxious? Try grounding techniques. 🌱";
+                      return "A little anxiety is common. Breathe and stay present. 🌼";
+                  default:
+                      return "Thanks for sharing your mood!";
+              }
+          }
+          
+          if (submitBtn) {
+              submitBtn.addEventListener('click', () => {
+                  if (!selectedMood) return;
+                  const intensity = intensitySlider.value;
+                  const message = generateMessage(selectedMood, intensity);
+                  resultMessage.textContent = message;
+          
+                  const moodData = { mood: selectedMood, intensity: Number(intensity) };
+                  localStorage.setItem('mindmosaicMood', JSON.stringify(moodData));
+          
+                  setTimeout(() => {
+                      window.location.href = 'ai-chatbot.html';
+                  }, 2000);
+              });
+          }
+
+      } else if (chatContainer) {
+          // --- AI Chatbot Page Logic ---
+
+          // Personalized Greeting
+          window.addEventListener('DOMContentLoaded', () => {
+              const moodDataStr = localStorage.getItem('mindmosaicMood');
+              if (moodDataStr) {
+                  try {
+                      const moodData = JSON.parse(moodDataStr);
+                      if (moodData && moodData.mood && typeof moodData.intensity === 'number') {
+                          const greetings = {
+                              happy: ["You seem happy today! Keep shining! 🌟", "Great to see your positive mood! 😊", "Your happiness is contagious! 😄"],
+                              calm: ["You’re feeling calm and centered. Nice! 🧘‍♂️", "Peaceful vibes today. Enjoy it! 🌿", "Calmness suits you well. 🌸"],
+                              sad: ["I see you’re feeling a bit sad. I’m here for you. 💙", "It’s okay to feel down sometimes. Take your time. 🌧️", "Sending you a virtual hug. 🤗"],
+                              angry: ["Feeling angry? Let’s try some deep breaths together. 🌬️", "I’m here to listen if you want to talk. 🧩", "Remember, it’s okay to feel frustrated. 🧘‍♀️"],
+                              anxious: ["Anxiety can be tough. You’re not alone. 💜", "Try grounding yourself. I’m here to help. 🌱", "Take a deep breath. We’ll get through this. 🌼"]
+                          };
+                          
+                          const moodGreetings = greetings[moodData.mood] || greetings.calm;
+                          const index = Math.min(Math.floor(moodData.intensity / 4), moodGreetings.length - 1);
+                          const greeting = moodGreetings[index];
+          
+                          setTimeout(() => {
+                              addMessage(greeting, 'bot', `mood-${moodData.mood}`);
+                          }, 500);
+                          
+                          localStorage.removeItem('mindmosaicMood');
+                      }
+                  } catch (e) {
+                      console.error('Error parsing mood data:', e);
+                  }
+              } else {
+                  // Default greeting
+                  setTimeout(() => {
+                      addMessage("Hello! What's on your mind?", 'bot');
+                  }, 500);
+              }
+          });
+
+          // Chat Functions
+          function addMessage(text, sender, moodClass = '') {
+              const msgDiv = document.createElement('div');
+              msgDiv.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+              if (moodClass) msgDiv.classList.add(moodClass);
+          
+              const avatarSpan = document.createElement('span');
+              avatarSpan.classList.add('avatar');
+              avatarSpan.textContent = sender === 'user' ? '🙂' : '🤖';
+          
+              const textSpan = document.createElement('span');
+              textSpan.textContent = text;
+          
+              if (sender === 'user') {
+                  msgDiv.appendChild(textSpan);
+                  msgDiv.appendChild(avatarSpan);
+              } else {
+                  msgDiv.appendChild(avatarSpan);
+                  msgDiv.appendChild(textSpan);
+              }
+          
+              chatContainer.appendChild(msgDiv);
+              chatContainer.scrollTop = chatContainer.scrollHeight;
+          }
+          
+          let typingIndicator = null;
+          function showTyping() {
+              typingIndicator = document.createElement('div');
+              typingIndicator.classList.add('message', 'bot-message');
+              typingIndicator.setAttribute('aria-live', 'off');
+              typingIndicator.innerHTML = `
+                  <span class="avatar">🤖</span>
+                  <span class="typing">MindMosaic is typing<span class="typing-dots">
+                  <span></span><span></span><span></span>
+                  </span></span>
+              `;
+              chatContainer.appendChild(typingIndicator);
+              chatContainer.scrollTop = chatContainer.scrollHeight;
+          }
+          
+          function removeTyping() {
+              if (typingIndicator) {
+                  chatContainer.removeChild(typingIndicator);
+                  typingIndicator = null;
+              }
+          }
+          
+          function botReply(userText) {
+              const lower = userText.toLowerCase();
+              if (lower.includes('hello') || lower.includes('hi')) {
+                  return { text: "Hello! How are you feeling today?", mood: 'mood-calm' };
+              } else if (lower.includes('sad') || lower.includes('down')) {
+                  return { text: "I'm sorry to hear that. Want to talk about it?", mood: 'mood-sad' };
+              } else if (lower.includes('happy') || lower.includes('good')) {
+                  return { text: "That's great! Keep that positive energy going!", mood: 'mood-happy' };
+              } else if (lower.includes('help')) {
+                  return { text: "I'm here to listen. Tell me more.", mood: 'mood-calm' };
+              } else {
+                  return { text: "I'm here to listen. Please share what's on your mind.", mood: 'mood-calm' };
+              }
+          }
+          
+          if (inputForm) {
+              inputForm.addEventListener('submit', (e) => {
+                  e.preventDefault();
+                  const message = userInput.value.trim();
+                  if (!message) return;
+          
+                  addMessage(message, 'user');
+                  userInput.value = '';
+                  sendBtn.disabled = true;
+          
+                  showTyping();
+          
+                  setTimeout(() => {
+                      removeTyping();
+                      const replyObj = botReply(message);
+                      addMessage(replyObj.text, 'bot', replyObj.mood);
+                      sendBtn.disabled = false;
+                      userInput.focus();
+                  }, 1500);
+              });
+          }
+
+          if (userInput) {
+              userInput.focus();
+          }
+      }
+  </script>
+</body>
+</html>

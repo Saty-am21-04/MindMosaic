@@ -6,7 +6,7 @@ document.getElementById("logMoodBtn").addEventListener("click", function () {
     localStorage.setItem("userMood", mood);
 
     // Redirect to chatbot page
-    window.location.href = "chatbot.html";
+    window.location.href = "ai-chatbot.html";
   } else {
     alert("Please enter your mood before proceeding.");
   }
