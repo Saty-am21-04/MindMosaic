@@ -223,11 +223,9 @@
 </head>
 <body>
     <header>MindMosaic AI Chat Bot</header>
-
     <div class="chat-wrapper" role="region" aria-label="Chat conversation">
         <div id="chat-container" aria-live="polite" aria-relevant="additions">
-            </div>
-
+        </div>
         <form id="input-area" aria-label="Send message form">
             <input
                 type="text"
@@ -243,7 +241,78 @@
     </div>
 
     <script>
-        // On page load, check for mood data from Mood Checker
+        // DOM element references
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const inputForm = document.getElementById('input-area');
+
+        // Function to add a message to the chat with avatar and animation
+        function addMessage(text, sender, moodClass = '') {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message');
+            msgDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            if (moodClass) msgDiv.classList.add(moodClass);
+
+            const avatarSpan = document.createElement('span');
+            avatarSpan.classList.add('avatar');
+            avatarSpan.textContent = sender === 'user' ? '🙂' : '🤖';
+
+            const textSpan = document.createElement('span');
+            textSpan.textContent = text;
+
+            if (sender === 'user') {
+                msgDiv.appendChild(textSpan);
+                msgDiv.appendChild(avatarSpan);
+            } else {
+                msgDiv.appendChild(avatarSpan);
+                msgDiv.appendChild(textSpan);
+            }
+
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Variable and functions for the typing indicator
+        let typingIndicator = null;
+        function showTyping() {
+            typingIndicator = document.createElement('div');
+            typingIndicator.classList.add('message', 'bot-message');
+            typingIndicator.setAttribute('aria-live', 'off');
+            typingIndicator.innerHTML = `
+                <span class="avatar">🤖</span>
+                <span class="typing">MindMosaic is typing<span class="typing-dots">
+                <span></span><span></span><span></span>
+                </span></span>
+            `;
+            chatContainer.appendChild(typingIndicator);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function removeTyping() {
+            if (typingIndicator) {
+                chatContainer.removeChild(typingIndicator);
+                typingIndicator = null;
+            }
+        }
+
+        // Basic bot reply logic based on user input keywords
+        function botReply(userText) {
+            const lower = userText.toLowerCase();
+            if (lower.includes('hello') || lower.includes('hi')) {
+                return { text: "Hello! How are you feeling today?", mood: 'mood-calm' };
+            } else if (lower.includes('sad') || lower.includes('down')) {
+                return { text: "I'm sorry to hear that. Want to talk about it?", mood: 'mood-sad' };
+            } else if (lower.includes('happy') || lower.includes('good')) {
+                return { text: "That's great! Keep that positive energy going!", mood: 'mood-happy' };
+            } else if (lower.includes('help')) {
+                return { text: "I'm here to listen. Tell me more.", mood: 'mood-calm' };
+            } else {
+                return { text: "I'm here to listen. Please share what's on your mind.", mood: 'mood-calm' };
+            }
+        }
+
+        // Event listeners and initial page load logic
         window.addEventListener('DOMContentLoaded', () => {
             const moodDataStr = localStorage.getItem('mindmosaicMood');
             if (moodDataStr) {
@@ -272,83 +341,13 @@
                     console.error('Error parsing mood data:', e);
                 }
             } else {
-                // Default greeting
+                // Default greeting if no mood data is found
                 setTimeout(() => {
                     addMessage("Hello! What's on your mind?", 'bot');
                 }, 500);
             }
         });
-    
-        const chatContainer = document.getElementById('chat-container');
-        const userInput = document.getElementById('user-input');
-        const sendBtn = document.getElementById('send-btn');
-        const inputForm = document.getElementById('input-area');
-    
-        // Add message with avatar and animation
-        function addMessage(text, sender, moodClass = '') {
-            const msgDiv = document.createElement('div');
-            msgDiv.classList.add('message');
-            msgDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
-            if (moodClass) msgDiv.classList.add(moodClass);
-        
-            const avatarSpan = document.createElement('span');
-            avatarSpan.classList.add('avatar');
-            avatarSpan.textContent = sender === 'user' ? '🙂' : '🤖';
-        
-            const textSpan = document.createElement('span');
-            textSpan.textContent = text;
-        
-            if (sender === 'user') {
-                msgDiv.appendChild(textSpan);
-                msgDiv.appendChild(avatarSpan);
-            } else {
-                msgDiv.appendChild(avatarSpan);
-                msgDiv.appendChild(textSpan);
-            }
-        
-            chatContainer.appendChild(msgDiv);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-    
-        // Typing indicator element
-        let typingIndicator = null;
-        function showTyping() {
-            typingIndicator = document.createElement('div');
-            typingIndicator.classList.add('message', 'bot-message');
-            typingIndicator.setAttribute('aria-live', 'off');
-            typingIndicator.innerHTML = `
-                <span class="avatar">🤖</span>
-                <span class="typing">MindMosaic is typing<span class="typing-dots">
-                <span></span><span></span><span></span>
-                </span></span>
-            `;
-            chatContainer.appendChild(typingIndicator);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-    
-        function removeTyping() {
-            if (typingIndicator) {
-                chatContainer.removeChild(typingIndicator);
-                typingIndicator = null;
-            }
-        }
-    
-        // Bot reply logic with mood class
-        function botReply(userText) {
-            const lower = userText.toLowerCase();
-            if (lower.includes('hello') || lower.includes('hi')) {
-                return { text: "Hello! How are you feeling today?", mood: 'mood-calm' };
-            } else if (lower.includes('sad') || lower.includes('down')) {
-                return { text: "I'm sorry to hear that. Want to talk about it?", mood: 'mood-sad' };
-            } else if (lower.includes('happy') || lower.includes('good')) {
-                return { text: "That's great! Keep that positive energy going!", mood: 'mood-happy' };
-            } else if (lower.includes('help')) {
-                return { text: "I'm here to listen. Tell me more.", mood: 'mood-calm' };
-            } else {
-                return { text: "I'm here to listen. Please share what's on your mind.", mood: 'mood-calm' };
-            }
-        }
-    
+
         if (inputForm) {
             inputForm.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -369,10 +368,6 @@
                     userInput.focus();
                 }, 1500);
             });
-        }
-    
-        if (userInput) {
-            userInput.focus();
         }
     </script>
 </body>

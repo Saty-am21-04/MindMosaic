@@ -1,135 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Welcome to MindMosaic</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to MindMosaic</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #a8edea, #fed6e3);
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #333;
-      position: relative;
-      overflow: hidden;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* Subtle animated background circles */
-    .background-circles {
-      position: absolute;
-      top: -100px;
-      left: -100px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle at center, #6c63ff55, transparent 70%);
-      border-radius: 50%;
-      animation: pulse 6s ease-in-out infinite;
-      z-index: 0;
-    }
+        /* Subtle animated background circles */
+        .background-circles {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center, #6c63ff55, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 6s ease-in-out infinite;
+            z-index: 0;
+        }
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.6;
-      }
-      50% {
-        transform: scale(1.1);
-        opacity: 0.8;
-      }
-    }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
 
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 0.3rem;
-      z-index: 1;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
-    }
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.3rem;
+            z-index: 1;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        }
 
-    .emoji {
-      font-size: 4rem;
-      margin-bottom: 0.5rem;
-      z-index: 1;
-    }
+        .emoji {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            z-index: 1;
+        }
 
-    p {
-      font-size: 1.3rem;
-      margin-bottom: 2.5rem;
-      max-width: 420px;
-      text-align: center;
-      font-weight: 500;
-      color: #444;
-      z-index: 1;
-      text-shadow: 0 0 3px #fff;
-    }
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 420px;
+            text-align: center;
+            font-weight: 500;
+            color: #444;
+            z-index: 1;
+            text-shadow: 0 0 3px #fff;
+        }
 
-    .btn-container {
-      display: flex;
-      gap: 2.5rem;
-      z-index: 1;
-    }
+        .btn-container {
+            display: flex;
+            gap: 2.5rem;
+            z-index: 1;
+        }
 
-    a.button {
-      text-decoration: none;
-      background-color: #6c63ff;
-      color: white;
-      padding: 1.3rem 2.8rem;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 1.25rem;
-      box-shadow: 0 6px 12px rgba(108, 99, 255, 0.4);
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+        a.button {
+            text-decoration: none;
+            background-color: #6c63ff;
+            color: white;
+            padding: 1.3rem 2.8rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.25rem;
+            box-shadow: 0 6px 12px rgba(108, 99, 255, 0.4);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
 
-    a.button:hover {
-      background-color: #574fd6;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(87, 79, 214, 0.6);
-    }
+        a.button:hover {
+            background-color: #574fd6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(87, 79, 214, 0.6);
+        }
 
-    a.button:active {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 12px rgba(87, 79, 214, 0.5);
-    }
+        a.button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 12px rgba(87, 79, 214, 0.5);
+        }
 
-    footer {
-      position: fixed;
-      bottom: 12px;
-      font-size: 0.9rem;
-      color: #666;
-      font-weight: 400;
-      z-index: 1;
-      user-select: none;
-    }
-  </style>
+        footer {
+            position: fixed;
+            bottom: 12px;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 400;
+            z-index: 1;
+            user-select: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="background-circles"></div>
-
-  <div class="emoji" aria-label="Brain emoji" role="img">🧠</div>
-  <h1>Welcome to MindMosaic</h1>
-  <p>Your AI-powered mental wellness companion. Choose an option below to get started on your journey to better mental health.</p>
-
-  <div class="btn-container">
-    <a href="mood-checker.html" class="button" aria-label="Go to Current Mood Checker">
-      😊 Mood Checker
-    </a>
-    <a href="ai-chatbot.html" class="button" aria-label="Go to AI Chat Bot">
-      💬 AI Chat Bot
-    </a>
-  </div>
-
-  <footer>© 2024 MindMosaic. All rights reserved.</footer>
+    <div class="background-circles"></div>
+    <div class="emoji" aria-label="Brain emoji" role="img">🧠</div>
+    <h1>Welcome to MindMosaic</h1>
+    <p>Your AI-powered mental wellness companion. Choose an option below to get started on your journey to better mental health.</p>
+    <div class="btn-container">
+        <a href="mood-checker.html" class="button" aria-label="Go to Current Mood Checker">
+            😊 Mood Checker
+        </a>
+        <a href="ai-chatbot.html" class="button" aria-label="Go to AI Chat Bot">
+            💬 AI Chat Bot
+        </a>
+    </div>
+    <footer>© 2024 MindMosaic. All rights reserved.</footer>
 </body>
 </html>
